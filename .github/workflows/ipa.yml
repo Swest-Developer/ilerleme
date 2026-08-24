@@ -1,0 +1,50 @@
+name: iPhone derlemesi
+
+# Bedava Mac: public repo'da GitHub'ın macOS runner'ları ücretsiz ve dakika sınırsız.
+# Çıkan .ipa İMZASIZ — AltStore/Sideloadly kendi Apple ID'nle yeniden imzalıyor.
+# Bu yüzden Apple Developer Program (99 $/yıl) gerekmiyor.
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:          # Actions sekmesinden elle de çalıştırılabilir
+
+jobs:
+  derle:
+    runs-on: macos-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: XcodeGen kur
+        run: brew install xcodegen
+
+      - name: Xcode projesini üret
+        run: xcodegen generate
+
+      - name: Derle (imzasız, cihaz için)
+        run: |
+          xcodebuild \
+            -project Ilerleme.xcodeproj \
+            -scheme Ilerleme \
+            -configuration Release \
+            -sdk iphoneos \
+            -derivedDataPath yapi \
+            CODE_SIGN_IDENTITY="" \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGNING_ALLOWED=NO \
+            | xcpretty || exit 1
+
+      - name: .ipa paketle
+        run: |
+          mkdir -p Payload
+          cp -R yapi/Build/Products/Release-iphoneos/Ilerleme.app Payload/
+          zip -qr Ilerleme.ipa Payload
+          ls -lh Ilerleme.ipa
+
+      - name: .ipa'yı yükle
+        uses: actions/upload-artifact@v4
+        with:
+          name: Ilerleme-ipa
+          path: Ilerleme.ipa
+          retention-days: 30
