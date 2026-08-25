@@ -1,6 +1,7 @@
-# İlerleme — iOS widget uygulaması
+# Seyir — iOS widget uygulaması
 
-Ana ekranda duran ilerleme widget'ı. Altı kapsam, tek motor:
+Ana ekranda duran ilerleme widget'ı. **Seyir**: hem gidişat hem seyretmek —
+zaman tarafını da, ileride gelecek kitap/dizi/anime tarafını da kapsıyor. Altı kapsam, tek motor:
 **Gün · Hafta · Ay · Yıl · Resmî tatil · Sayaç**
 
 Tasarım tezgâhı ayrı klasörde: `../widget-tezgah` (tarayıcıda açılıyor, derleme yok).
@@ -22,18 +23,18 @@ Private repo'da macOS dakikası 10 katıyla düşülür — o yüzden public olm
 
 ```bash
 git init && git add . && git commit -m "ilk"
-gh repo create ilerleme --public --source=. --push
+gh repo create seyir --public --source=. --push
 ```
 
 ### 2. Derleme kendiliğinden çalışır
 
-`.github/workflows/ipa.yml` her push'ta çalışıp **imzasız** bir `Ilerleme.ipa`
+`.github/workflows/ipa.yml` her push'ta çalışıp **imzasız** bir `Seyir.ipa`
 üretiyor ve Actions sekmesindeki artifact'lere koyuyor. İndir.
 
 ### 3. Telefona kur
 
 - Windows'a **AltServer** kur, iPhone'u bir kez USB ile eşle.
-- `Ilerleme.ipa`'yı AltStore ile kur. Kendi (ücretsiz) Apple ID'nle imzalanıyor.
+- `Seyir.ipa`'yı AltStore ile kur. Kendi (ücretsiz) Apple ID'nle imzalanıyor.
 - Aynı Wi-Fi'dayken AltServer uygulamayı arka planda yeniliyor.
 
 **Ücretsiz Apple ID sınırları:** sertifika 7 gün geçerli, aynı anda en fazla 3
@@ -56,9 +57,9 @@ Ortak/          iki hedefe de derleniyor
   Cekirdek.swift    Kapsam, Ilerleme, Sayac, Tasarim, RenkSecimi
   Motor.swift       Tatiller tablosu + altı kapsamın hesabı
 Uygulama/
-  IlerlemeApp.swift İlerleme listesi + ekleme rehberi
+  SeyirApp.swift    İlerleme listesi + ekleme rehberi
 Widget/
-  IlerlemeWidget.swift  AppIntent ayarı, zaman çizelgesi
+  SeyirWidget.swift     AppIntent ayarı, zaman çizelgesi
   WidgetGovdesi.swift   Tasarımların SwiftUI karşılığı
 .github/workflows/
   ipa.yml           Bedava macOS runner'da imzasız .ipa üretimi
@@ -107,5 +108,5 @@ Son doğrulama: 2027 Ramazan Bayramı 9-11 Mart, Kurban Bayramı 16-19 Mayıs.
   çizgi) — tezgâhta var, SwiftUI'a çevrilmedi. `Tasarim` enum'una ekleyip
   `WidgetGovdesi`'ne bir `case` yazmak yeterli.
 - `systemLarge` boyutu
-- Uygulama ikonu, isim (şu anki ad geçici)
+
 - Kitap/dizi koleksiyonu — v2, ayrı iş

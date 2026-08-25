@@ -14,7 +14,7 @@ import AppIntents
 /// ayrı bir süreç ve ortak depo (App Group) ücretsiz Apple hesabında engelli.
 /// Böylece v1 tek kuruş harcamadan kendi telefonuna kurulabiliyor.
 struct WidgetAyari: WidgetConfigurationIntent {
-    static var title: LocalizedStringResource = "İlerleme"
+    static var title: LocalizedStringResource = "Seyir"
     static var description = IntentDescription("Ana ekranında neyi göstereceğini seç.")
 
     @Parameter(title: "Kapsam", default: .yil)
@@ -88,13 +88,13 @@ struct Saglayici: AppIntentTimelineProvider {
 // MARK: - Widget
 
 @main
-struct IlerlemeWidgetBundle: WidgetBundle {
-    var body: some Widget { IlerlemeWidget() }
+struct SeyirWidgetBundle: WidgetBundle {
+    var body: some Widget { SeyirWidget() }
 }
 
-struct IlerlemeWidget: Widget {
+struct SeyirWidget: Widget {
     var body: some WidgetConfiguration {
-        AppIntentConfiguration(kind: "IlerlemeWidget",
+        AppIntentConfiguration(kind: "SeyirWidget",
                                intent: WidgetAyari.self,
                                provider: Saglayici()) { giris in
             WidgetGovdesi(giris: giris)
@@ -102,7 +102,7 @@ struct IlerlemeWidget: Widget {
                     Color.black.opacity(0.72)
                 }
         }
-        .configurationDisplayName("İlerleme")
+        .configurationDisplayName("Seyir")
         .description("Yıl, ay, hafta, gün, resmî tatil ya da kendi sayacın.")
         .supportedFamilies([.systemSmall, .systemMedium,
                             .accessoryCircular, .accessoryRectangular])

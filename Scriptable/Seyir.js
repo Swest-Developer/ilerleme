@@ -1,11 +1,11 @@
-// İlerleme — Scriptable widget'ı
+// Seyir — Scriptable widget'ı
 //
 // Swift sürümünün aynı motoru, JavaScript'e taşınmış hâli. Mac, sertifika ya da
 // sideload gerektirmiyor: App Store'dan Scriptable kurup bu dosyayı yapıştırman yeterli.
 //
 // KULLANIM
 //   Ana ekrana Scriptable widget'ı ekle → uzun bas → "Widget'ı Düzenle"
-//   Script    : Ilerleme
+//   Script    : Seyir
 //   Parameter : kapsam + (isteğe bağlı) tasarım + (isteğe bağlı) renk
 //
 //   KAPSAM   yil · ay · hafta · gun · tatil   ya da   "Ehliyet sınavı, 2026-09-12"

@@ -1,7 +1,7 @@
 import SwiftUI
 
 @main
-struct IlerlemeApp: App {
+struct SeyirApp: App {
     var body: some Scene {
         WindowGroup { KokEkran() }
     }

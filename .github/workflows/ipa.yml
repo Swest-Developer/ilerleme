@@ -25,8 +25,8 @@ jobs:
       - name: Derle (imzasız, cihaz için)
         run: |
           xcodebuild \
-            -project Ilerleme.xcodeproj \
-            -scheme Ilerleme \
+            -project Seyir.xcodeproj \
+            -scheme Seyir \
             -configuration Release \
             -sdk iphoneos \
             -derivedDataPath yapi \
@@ -38,13 +38,13 @@ jobs:
       - name: .ipa paketle
         run: |
           mkdir -p Payload
-          cp -R yapi/Build/Products/Release-iphoneos/Ilerleme.app Payload/
-          zip -qr Ilerleme.ipa Payload
-          ls -lh Ilerleme.ipa
+          cp -R yapi/Build/Products/Release-iphoneos/Seyir.app Payload/
+          zip -qr Seyir.ipa Payload
+          ls -lh Seyir.ipa
 
       - name: .ipa'yı yükle
         uses: actions/upload-artifact@v4
         with:
-          name: Ilerleme-ipa
-          path: Ilerleme.ipa
+          name: Seyir-ipa
+          path: Seyir.ipa
           retention-days: 30

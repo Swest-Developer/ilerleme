@@ -13,13 +13,13 @@ sürümü duruyor — bu, bugün telefonunda çalışan sürüm.
 
 1. App Store'dan **Scriptable**'ı indir (ücretsiz)
 2. Telefonun tarayıcısında şu adresi aç:
-   `https://raw.githubusercontent.com/Swest-Developer/ilerleme/main/Scriptable/Ilerleme.js`
+   `https://raw.githubusercontent.com/Swest-Developer/seyir/main/Scriptable/Seyir.js`
 3. Sayfadaki metnin tamamını seç ve kopyala
 4. Scriptable → sağ üstteki **+** → açılan boş script'e yapıştır
-5. Sağ üstteki ayarlardan adını **Ilerleme** yap, kaydet
+5. Sağ üstteki ayarlardan adını **Seyir** yap, kaydet
 6. Ana ekranda boş bir yere uzun bas → **+** → **Scriptable** → boyutu seç, ekle
 7. Eklenen widget'a uzun bas → **Widget'ı Düzenle**
-   - **Script**: Ilerleme
+   - **Script**: Seyir
    - **When Interacting**: Run Script
    - **Parameter**: aşağıdaki tablodan biri
 
@@ -90,6 +90,6 @@ parametre çözümü, Türkçe büyük harf, tatil tablosunun sıralı olması v
 
 ## Bakım borcu
 
-`Ilerleme.js` → `TATIL_DINI` listesi **her yıl elle güncellenmeli.** Dini bayramlar
+`Seyir.js` → `TATIL_DINI` listesi **her yıl elle güncellenmeli.** Dini bayramlar
 hicri takvime bağlı olduğu için hesaplanmıyor, yazılıyor.
 Son doğrulama: 2027 Ramazan Bayramı 9-11 Mart, Kurban Bayramı 16-19 Mayıs.

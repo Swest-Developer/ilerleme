@@ -1,4 +1,4 @@
-// Ilerleme.js'i Scriptable olmadan ölçüyor.
+// Seyir.js'i Scriptable olmadan ölçüyor.
 // Scriptable API'leri (ListWidget, DrawContext, Color, Font...) taklit ediliyor.
 // Ölçülen şey pikseller değil: hesap doğruluğu, parametre çözümü ve her
 // tasarımın her kapsamda hatasız çizilebilmesi.
@@ -64,7 +64,7 @@ const kuresel = {
   args: { widgetParameter: null },
 };
 
-const kaynak = fs.readFileSync(path.join(__dirname, "..", "Ilerleme.js"), "utf8");
+const kaynak = fs.readFileSync(path.join(__dirname, "..", "Seyir.js"), "utf8");
 const sar = new Function(
   ...Object.keys(kuresel),
   `return (async () => { ${kaynak}
