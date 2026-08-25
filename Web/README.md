@@ -7,8 +7,9 @@ sunucu gerekmiyor. Telefonun tarayıcısında da çalışıyor.
 Web/
   index.html    iskelet
   uslup.css     görünüm
-  motor.js      kapsam hesapları + tatil tablosu  (Swift ve Scriptable ile aynı mantık)
+  motor.js      kapsam hesapları + tatil tablosu + raf ilerlemesi
   arayuz.js     kart çizimi, sayaç yönetimi
+  raf.js        kitap/anime/manga araması, raf yönetimi
   sunucu.js     yalnızca yerel test için (node sunucu.js → localhost:8778)
 ```
 
@@ -18,6 +19,9 @@ Web/
 
 **Sayaçlarım:** kendi eklediklerin. Tek alan var: tarih.
 Gelecekse geri sayıyor, geçmişse ileri. Yön sorulmuyor.
+
+**Raf:** kitap, anime, manga, dizi, film. Kapak ve bölüm/sayfa sayısı aramadan
+geliyor; karttaki düğmelerle ilerletiyorsun (kitapta +10 / +25, diğerlerinde +1).
 
 **Beş tasarım:** dolan kap · yüzde · kalan · halka · nokta — üstteki şeritten seçiliyor,
 altı renk seçeneğiyle birlikte.
@@ -29,6 +33,23 @@ veri cihazdan çıkmıyor.
 
 Tasarımlar kapsamı bilmez — hepsi yalnızca `motor.js`'in ürettiği `ilerleme`
 yapısını çizer. Yeni kapsam eklemek tasarımlara dokunmadan yapılır.
+
+**Raf da aynı yapıya çevriliyor:** 278/724 sayfa da, 7/28 bölüm de, yılın %65'i de
+aynı `oran`. Bu yüzden raf zamanla aynı dili konuşuyor.
+
+## Arama kaynakları
+
+| Tür | Kaynak | Anahtar |
+|---|---|---|
+| Kitap | Open Library | gerekmiyor |
+| Anime · Manga | AniList (GraphQL) | gerekmiyor |
+| Dizi · Film | yok — elle giriliyor | — |
+
+Dizi ve film için anahtarsız ücretsiz bir kaynak bulunamadı; TMDB anahtar istiyor
+ve anahtarı koda gömmek doğru değil. **Ölçüldü (25.08.2026):** Jikan/MyAnimeList
+504 veriyor, o yüzden anime tarafında AniList seçildi.
+
+Arama başarısız olursa arayüz kilitlenmiyor — hata yazılıp elle ekleme öneriliyor.
 
 ## Web'e özel karar
 
@@ -44,5 +65,6 @@ Son doğrulama: 2027 Ramazan Bayramı 9-11 Mart, Kurban Bayramı 16-19 Mayıs.
 
 ## Sırada
 
-- Kitap / dizi / anime rafı — asıl istenen kısım, web'de kapak ve arama kolay
+- Raf öğesinin toplamını sonradan düzeltmek (kaynak yanlış sayı verirse)
+- Bitenler için ayrı bölüm / durum (sürüyor · bitti · bırakıldı)
 - Yayına alma (Vercel)

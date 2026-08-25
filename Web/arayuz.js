@@ -23,7 +23,7 @@ const HAZIR_SAYACLAR = [
 
 /* ---------------------------------------------------------------- durum */
 
-const varsayilan = { tasarim: "kap", renk: RENKLER[0], sayaclar: [] };
+const varsayilan = { tasarim: "kap", renk: RENKLER[0], sayaclar: [], raf: [] };
 
 function oku() {
   try {
@@ -131,6 +131,53 @@ function kartYap(i, silId) {
   return kart;
 }
 
+
+/* Raf kartı ayrı çiziliyor: kapak zemine geçiyor, üstüne seviye çizgisi ve
+   hızlı ilerletme düğmeleri biniyor. Yine de aynı `ilerleme` yapısını kullanıyor. */
+function rafKarti(oge) {
+  const i = rafIlerlemesi(oge);
+  const kart = el("article", "kart rafkart");
+
+  if (i.kapak) {
+    const k = el("div", "kapak");
+    k.style.backgroundImage = `url("${i.kapak}")`;
+    kart.append(k, el("div", "perde"));
+  } else {
+    kart.classList.add("kapaksiz");
+  }
+
+  const d = el("div", "dolgu");
+  d.style.height = (i.oran * 100).toFixed(2) + "%";
+  kart.append(d);
+
+  const bas = el("div", "bas");
+  bas.append(el("i"), document.createTextNode(
+    (RAF_TURLERI.find((t) => t.id === i.tur) || {}).ad || ""));
+  kart.append(bas, el("div", "bosluk"));
+
+  kart.append(el("div", "rafad", i.kisaAd));
+  kart.append(el("div", "alt", i.altMetin + "  ·  %" + Math.round(i.oran * 100)));
+
+  const dugmeler = el("div", "rafdugme");
+  const yap = (yazi, adim, baslik) => {
+    const b = el("button", null, yazi);
+    b.title = baslik;
+    b.onclick = (e) => { e.stopPropagation(); rafIlerlet(oge.id, adim); };
+    return b;
+  };
+  if (i.tur === "kitap") dugmeler.append(yap("+10", 10, "10 sayfa"), yap("+25", 25, "25 sayfa"));
+  else dugmeler.append(yap("+1", 1, "1 " + i.birim));
+  dugmeler.append(yap("−", -1, "geri al"));
+  kart.append(dugmeler);
+
+  const sil = el("button", "sil", "×");
+  sil.title = "Raftan çıkar";
+  sil.onclick = () => rafSil(oge.id);
+  kart.append(sil);
+
+  return kart;
+}
+
 /* ---------------------------------------------------------------- çizim */
 
 function cizHepsi() {
@@ -148,6 +195,12 @@ function cizHepsi() {
   const ekle = el("button", "ekle", "<b>+</b>Sayaç ekle");
   ekle.onclick = pencereAc;
   izgara.append(ekle);
+
+  izgara.append(el("h2", null, "Raf"));
+  for (const o of D.raf) izgara.append(rafKarti(o));
+  const rafEkle = el("button", "ekle", "<b>+</b>Rafa ekle");
+  rafEkle.onclick = rafPencereAc;
+  izgara.append(rafEkle);
 
   for (const b of document.querySelectorAll("#tasarimlar button"))
     b.setAttribute("aria-pressed", String(b.dataset.t === D.tasarim));
@@ -235,6 +288,8 @@ function kurulum() {
   document.getElementById("s-ad").addEventListener("input", onizlemeTazele);
   document.getElementById("s-tarih").addEventListener("input", onizlemeTazele);
   document.getElementById("s-vazgec").onclick = () => pencere().close();
+
+  rafKurulum();
 
   cizHepsi();
 

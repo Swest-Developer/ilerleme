@@ -197,3 +197,58 @@ dialog p.ipucu { font-size: 12.5px; color: var(--metin-2); margin-bottom: 18px; 
 
   .kart .sil { opacity: 1; }
 }
+
+/* ---------------- raf ---------------- */
+
+.rafkart { justify-content: flex-end; }
+.rafkart .kapak {
+  position: absolute; inset: 0; background-size: cover; background-position: center;
+  filter: saturate(1.05);
+}
+.rafkart .perde {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(8, 9, 12, .94) 22%, rgba(8, 9, 12, .35) 70%,
+                                      rgba(8, 9, 12, .55));
+}
+.rafkart.kapaksiz { background: linear-gradient(155deg, #23252d, #16171d); }
+.rafkart .bas { position: absolute; top: 16px; left: 18px; }
+.rafkart .rafad {
+  position: relative; font-size: 15.5px; font-weight: 700; letter-spacing: -.2px;
+  line-height: 1.25; margin-bottom: 4px;
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+}
+.rafkart .alt { margin-top: 0; font-size: 11px; }
+
+.rafdugme {
+  position: absolute; inset: auto 0 0 0; display: flex; gap: 6px;
+  padding: 12px 14px; background: linear-gradient(to top, rgba(8, 9, 12, .95), transparent);
+  opacity: 0; transition: .15s;
+}
+.rafkart:hover .rafdugme { opacity: 1; }
+.rafdugme button {
+  flex: 1; border: 1px solid rgba(255, 255, 255, .16); border-radius: 9px;
+  background: rgba(20, 21, 26, .85); color: var(--metin); font: inherit;
+  font-size: 12.5px; font-weight: 700; padding: 7px 0; cursor: pointer;
+}
+.rafdugme button:hover { border-color: var(--vurgu); color: var(--vurgu); }
+
+/* arama sonuçları */
+.raf-sonuclar { max-height: 320px; overflow-y: auto; margin-bottom: 16px; }
+.raf-sonuc {
+  display: flex; gap: 12px; align-items: center; width: 100%; text-align: left;
+  background: var(--kart); border: 1px solid var(--cizgi); border-radius: 12px;
+  padding: 9px; margin-bottom: 7px; cursor: pointer; color: var(--metin);
+  font: inherit; transition: .14s;
+}
+.raf-sonuc:hover { border-color: var(--vurgu); }
+.raf-kapak {
+  width: 42px; height: 60px; flex: none; border-radius: 6px;
+  background: rgba(255, 255, 255, .07) center/cover;
+}
+.raf-bilgi { min-width: 0; }
+.raf-bilgi b { display: block; font-size: 13.5px; font-weight: 600; line-height: 1.3; }
+.raf-bilgi span { display: block; font-size: 11.5px; color: var(--metin-2); margin-top: 3px; }
+.raf-durum { font-size: 13px; color: var(--metin-2); padding: 14px 2px; }
+.raf-durum.hata { color: #ff9b8b; }
+
+@media (max-width: 640px) { .rafkart .rafdugme { opacity: 1; } }

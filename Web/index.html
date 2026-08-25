@@ -54,7 +54,47 @@
   </form>
 </dialog>
 
+
+<dialog id="raf-pencere">
+  <h3>Rafa ekle</h3>
+  <p class="ipucu">Kitap, anime ve mangayı arayarak ekleyebilirsin — kapak ve
+    bölüm sayısı kendiliğinden geliyor. Dizi ve film için anahtarsız ücretsiz
+    bir kaynak olmadığı için elle giriliyor.</p>
+
+  <div class="hazirlar" id="r-turler"></div>
+
+  <div id="r-arama-alani">
+    <div class="alan">
+      <label for="r-sorgu">Ara</label>
+      <input id="r-sorgu" type="text" placeholder="Tutunamayanlar" autocomplete="off">
+    </div>
+  </div>
+
+  <form id="r-elle-form" hidden>
+    <div id="r-elle-alani">
+      <div class="alan">
+        <label for="r-ad">Adı</label>
+        <input id="r-ad" type="text" placeholder="Severance" autocomplete="off">
+      </div>
+      <div class="alan">
+        <label for="r-toplam">Kaç bölüm</label>
+        <input id="r-toplam" type="number" min="1" placeholder="10">
+      </div>
+      <div class="dugmeler" style="margin-bottom:14px">
+        <button type="submit" class="birincil">Rafa ekle</button>
+      </div>
+    </div>
+  </form>
+
+  <div id="r-sonuc" class="raf-sonuclar"></div>
+
+  <div class="dugmeler">
+    <button type="button" class="ikincil" id="r-vazgec">Kapat</button>
+  </div>
+</dialog>
+
 <script src="motor.js"></script>
+<script src="raf.js"></script>
 <script src="arayuz.js"></script>
 </body>
 </html>

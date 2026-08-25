@@ -137,7 +137,42 @@ function hesapla(kapsam, sayac, simdi = new Date()) {
   };
 }
 
+
+/* ---------------------------------------------------------------- raf
+ *
+ * Kitap, dizi, film, anime, manga. Hepsi aynı `ilerleme` yapısına çevriliyor —
+ * yani raf kartları da zaman kartlarıyla AYNI tasarımlarla çizilebiliyor.
+ *   kitap  → sayfa
+ *   dizi   → bölüm      anime → bölüm
+ *   manga  → bölüm      film  → tek parça
+ */
+
+const RAF_TURLERI = [
+  { id: "kitap", ad: "Kitap", birim: "sayfa",  kaynak: "openlibrary" },
+  { id: "anime", ad: "Anime", birim: "bölüm",  kaynak: "anilist" },
+  { id: "manga", ad: "Manga", birim: "bölüm",  kaynak: "anilist" },
+  { id: "dizi",  ad: "Dizi",  birim: "bölüm",  kaynak: null },
+  { id: "film",  ad: "Film",  birim: "parça",  kaynak: null },
+];
+
+function rafIlerlemesi(oge) {
+  const tur = RAF_TURLERI.find((t) => t.id === oge.tur) || RAF_TURLERI[0];
+  const toplam = Math.max(1, Number(oge.toplam) || 1);
+  const mevcut = kirp(Number(oge.mevcut) || 0, 0, toplam);
+  const oran = mevcut / toplam;
+
+  return {
+    ad: buyukTR(oge.ad), kisaAd: oge.ad,
+    oran, sayi: toplam - mevcut, birim: tur.birim, ileri: false,
+    altMetin: mevcut + " / " + toplam + " " + tur.birim,
+    adet: Math.min(toplam, 120),
+    sutun: toplam > 60 ? 12 : toplam > 20 ? 8 : 5,
+    raf: true, mevcut, toplam, tur: tur.id, kapak: oge.kapak || "",
+  };
+}
+
 /* Node testleri için; tarayıcıda global kalıyor. */
 if (typeof module !== "undefined" && module.exports) {
-  module.exports = { hesapla, tatilListesi, KAPSAMLAR, AYLAR, tarihYaz };
+  module.exports = { hesapla, tatilListesi, rafIlerlemesi,
+                     KAPSAMLAR, RAF_TURLERI, AYLAR, tarihYaz };
 }
