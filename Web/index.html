@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0b0c10">
+<title>Seyir</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="uslup.css">
+</head>
+<body>
+
+<header class="ust">
+  <div class="marka">
+    Sey<span>ir</span>
+    <small>bir şeyin neresindesin</small>
+  </div>
+
+  <div class="araclar">
+    <label for="tasarimlar">Tasarım</label>
+    <div class="secim" id="tasarimlar"></div>
+    <div class="renkler" id="renkler"></div>
+  </div>
+</header>
+
+<main class="izgara" id="izgara"></main>
+
+<dialog id="pencere">
+  <form id="s-form" method="dialog">
+    <h3>Yeni sayaç</h3>
+    <p class="ipucu">Bir isim, bir tarih. Başka soru yok — tarih ileriyse geri sayar,
+      geride kaldıysa "kaç gündür" sayar.</p>
+
+    <div class="hazirlar" id="hazirlar"></div>
+
+    <div class="alan">
+      <label for="s-ad">Ne için</label>
+      <input id="s-ad" type="text" placeholder="Ehliyet sınavı" autocomplete="off">
+    </div>
+
+    <div class="alan">
+      <label for="s-tarih">Ne zaman</label>
+      <input id="s-tarih" type="date">
+    </div>
+
+    <div class="onizleme" id="onizleme">Bir tarih seç — gerisini kendi hesaplar.</div>
+
+    <div class="dugmeler">
+      <button type="button" class="ikincil" id="s-vazgec">Vazgeç</button>
+      <button type="submit" class="birincil" id="s-kaydet" disabled>Kaydet</button>
+    </div>
+  </form>
+</dialog>
+
+<script src="motor.js"></script>
+<script src="arayuz.js"></script>
+</body>
+</html>
